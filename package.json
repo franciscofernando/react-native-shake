@@ -1,11 +1,11 @@
 {
-  "name": "react-native-shake",
-  "version": "3.4.0",
-  "description": "Detect shake event on Android and iOS",
+  "name": "react-native-jump",
+  "version": "3.4.1",
+  "description": "Detect jump event on Android",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Clip-sub/react-native-shake.git"
+    "url": "https://github.com/franciscofernando/react-native-shake.git"
   },
   "keywords": [
     "android",
@@ -23,9 +23,9 @@
   "author": "Clip-sub <support@clip-sub.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Clip-sub/react-native-shake/issues"
+    "url": "https://github.com/franciscofernando/react-native-shake.git/issues"
   },
-  "homepage": "https://github.com/Clip-sub/react-native-shake",
+  "homepage": "https://github.com/franciscofernando/react-native-shake.git",
   "dependencies": {
     "invariant": "^2.2.x"
   }

@@ -86,18 +86,24 @@ public class CustomShakeDetector implements SensorEventListener {
   }
 
   @Override
-  public void onSensorChanged(SensorEvent event) {
-    detectJump(event.values[0], event.timestamp);
-  }
-  
-  private void detectJump(float xValue, long timestamp) {
-    if ((Math.abs(xValue) > GRAVITY_THRESHOLD)) {
-        if(timestamp - mLastTime < TIME_THRESHOLD_NS && mUp != (xValue > 0)) {
-            onJumpDetected(!mUp);
+  public void onSensorChanged(SensorEvent sensorEvent) {
+    if (foEvent.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
+
+        double loX = foEvent.values[0];
+        double loY = foEvent.values[1];
+        double loZ = foEvent.values[2];
+
+        double loAccelerationReader = Math.sqrt(Math.pow(loX, 2)
+                + Math.pow(loY, 2)
+                + Math.pow(loZ, 2));
+
+        DecimalFormat precision = new DecimalFormat("0.00");
+        double ldAccRound = Double.parseDouble(precision.format(loAccelerationReader));
+
+        if (ldAccRound > 0.3d && ldAccRound < 0.5d) {
+          mShakeListener.onShake();
         }
-        mUp = xValue > 0;
-        mLastTime = timestamp;
-    }
+   }
   }
 
   @Override
