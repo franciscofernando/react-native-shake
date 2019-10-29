@@ -86,7 +86,7 @@ public class CustomShakeDetector implements SensorEventListener {
   }
 
   @Override
-  public void onSensorChanged(SensorEvent sensorEvent) {
+  public void onSensorChanged(SensorEvent foEvent) {
     if (foEvent.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
 
         double loX = foEvent.values[0];

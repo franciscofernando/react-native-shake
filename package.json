@@ -1,6 +1,6 @@
 {
   "name": "react-native-jump",
-  "version": "3.4.1",
+  "version": "3.4.2",
   "description": "Detect jump event on Android",
   "main": "index.js",
   "repository": {
