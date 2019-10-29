@@ -86,25 +86,18 @@ public class CustomShakeDetector implements SensorEventListener {
   }
 
   @Override
-  public void onSensorChanged(SensorEvent sensorEvent) {
-    if (sensorEvent.timestamp - mLastTimestamp < MIN_TIME_BETWEEN_SAMPLES_NS) {
-      return;
+  public void onSensorChanged(SensorEvent event) {
+    detectJump(event.values[0], event.timestamp);
+  }
+  
+  private void detectJump(float xValue, long timestamp) {
+    if ((Math.abs(xValue) > GRAVITY_THRESHOLD)) {
+        if(timestamp - mLastTime < TIME_THRESHOLD_NS && mUp != (xValue > 0)) {
+            onJumpDetected(!mUp);
+        }
+        mUp = xValue > 0;
+        mLastTime = timestamp;
     }
-
-    Assertions.assertNotNull(mTimestamps);
-    Assertions.assertNotNull(mMagnitudes);
-
-    float ax = sensorEvent.values[0];
-    float ay = sensorEvent.values[1];
-    float az = sensorEvent.values[2];
-
-    mLastTimestamp = sensorEvent.timestamp;
-    mTimestamps[mCurrentIndex] = sensorEvent.timestamp;
-    mMagnitudes[mCurrentIndex] = Math.sqrt(ax * ax + ay * ay + az * az);
-
-    maybeDispatchShake(sensorEvent.timestamp);
-
-    mCurrentIndex = (mCurrentIndex + 1) % MAX_SAMPLES;
   }
 
   @Override
